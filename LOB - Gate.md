@@ -107,9 +107,8 @@ SFP의 크기는 4 byte
 
 ## 쉘코드
 
-- https://security-nanglam.tistory.com/117 에서 쉘코드 가져옴
+![1567941320888](https://user-images.githubusercontent.com/52530785/64917129-15c25880-d7c8-11e9-8b5c-b4b095005f72.png)
 
-![1567941320888](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567941320888.png)
 
 ```c
 \x90으로 215 바이트
