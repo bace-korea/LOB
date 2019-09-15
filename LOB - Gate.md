@@ -2,7 +2,7 @@
 
 ## 주어진 파일
 
-https://github.com/sjw9408/LOB/blob/master/LOB%20-%20Gate.assets/1567941739468.png
+![1567941739468](https://user-images.githubusercontent.com/52530785/64917066-bd3e8b80-d7c6-11e9-9d72-9cb26dfdacf1.png)
 
 
 ID : gate
