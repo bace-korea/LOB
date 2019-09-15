@@ -2,8 +2,7 @@
 
 ## 주어진 파일
 
-![1567941739468](C:%5CUsers%5CJaewan.DESKTOP-TRD27GL%5CDesktop%5CLOB%5CLOB%5CLOB%20-%20Gate.assets%5C1567941739468-1568525084718.png)
-
+https://github.com/sjw9408/LOB/blob/master/LOB%20-%20Gate.assets/1567941739468.png
 
 
 ID : gate
